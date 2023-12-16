@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Metrics</h1>
+
+<div id="metrics">
+  <% @metrics.each do |metric| %>
+    <%= render metric %>
+    <p>
+      <%= link_to "Show this metric", metric %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New metric", new_metric_path %>
