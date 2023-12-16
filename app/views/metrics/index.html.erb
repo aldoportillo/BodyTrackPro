@@ -1,19 +1,29 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-3">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Metrics</h1>
+    <% if @most_recent_metric != Date.today %>
+      <%= link_to "Daily Check In", new_metric_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#newMetricModal", "data-url": new_metric_path %>
+    <% end %>
+  </div>
 
-<h1>Metrics</h1>
-
-<%= line_chart @weight_by_day, id: "weight-chart", xtitle: "Date", ytitle: "Total Weight" %>
-<%= line_chart @fat_percentage_by_day, id: "fat-percentage-chart", xtitle: "Date", ytitle: "Average Fat Percentage" %>
-<%= line_chart @muscle_percentage_by_day, id: "muscle-percentage-chart", xtitle: "Date", ytitle: "Average Muscle Percentage" %>
-
-<%= @weight_by_day %>
-<div id="metrics">
-  <% @metrics.each do |metric| %>
-    <%= render metric %>
-    <p>
-      <%= link_to "Show this metric", metric %>
-    </p>
-  <% end %>
+  <%= line_chart [
+    {name: "Total Weight", data: @weight_by_day},
+    {name: "Fat Mass", data: @fat_mass_by_day},
+    {name: "Muscle Mass", data: @muscle_mass_by_day}
+  ], id: "combined-chart", xtitle: "Date", ytitle: "Pounds" %>
 </div>
 
-<%= link_to "New metric", new_metric_path %>
+<div class="modal fade" id="newMetricModal" tabindex="-1" aria-labelledby="newMetricModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newMetricModalLabel">New Metric</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', metric: Metric.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
