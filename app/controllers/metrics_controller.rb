@@ -1,6 +1,6 @@
 class MetricsController < ApplicationController
   before_action :set_metric, only: %i[ show edit update destroy ]
-
+  before_action :authenticate_user!
   # GET /metrics or /metrics.json
   def index
     @user = current_user
