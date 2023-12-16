@@ -1,0 +1,36 @@
+<%= form_with(model: metric) do |form| %>
+  <% if metric.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(metric.errors.count, "error") %> prohibited this metric from being saved:</h2>
+
+      <ul>
+        <% metric.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :weight, style: "display: block" %>
+    <%= form.number_field :weight %>
+  </div>
+
+  <div>
+    <%= form.label :fat_percentage, style: "display: block" %>
+    <%= form.number_field :fat_percentage %>
+  </div>
+
+  <div>
+    <%= form.label :muscle_percentage, style: "display: block" %>
+    <%= form.number_field :muscle_percentage %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id%>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
