@@ -1,2 +1,0 @@
-class MusclePercentage < ApplicationRecord
-end
