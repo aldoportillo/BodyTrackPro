@@ -1,65 +1,26 @@
-# frozen_string_literal: true
-
-class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
-
-
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
-
-  # POST /resource
-  # def create
-  #   super
-  # end
-
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
-
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
-
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
+# ApplicationController is the main controller from which all other controllers inherit.
+class ApplicationController < ActionController::Base
+  # Skip the default Rails forgery protection
+  skip_forgery_protection
+  # Rescue from a Pundit::NotAuthorizedError with the user_not_authorized method
+  #rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  # Include Pundit's authorization methods
+  #include Pundit::Authorization
+  # Before any action, configure the permitted parameters if it's a Devise controller
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
-
   # If you have extra params to permit, append them to the sanitizer. 
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :dob, :height, :sex])
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :dob, :height, :sex, :password, :password_confirmation, :current_password])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :height, :password, :password_confirmation, :current_password])
   end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password, :dob, :height, :sex])
+  private
+
+  # user_not_authorized is a private method that sets a flash message and redirects the user when they are not authorized to perform an action
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(request.referrer || root_path)
   end
-
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  
 end
