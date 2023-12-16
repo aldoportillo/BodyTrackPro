@@ -31,11 +31,6 @@ class MetricsController < ApplicationController
   def show
   end
 
-  # GET /metrics/new
-  def new
-    @metric = Metric.new
-  end
-
   # GET /metrics/1/edit
   def edit
   end
@@ -46,7 +41,7 @@ class MetricsController < ApplicationController
 
     respond_to do |format|
       if @metric.save
-        format.html { redirect_to metric_url(@metric), notice: "Metric was successfully created." }
+        format.html { redirect_to metrics_url, notice: "Thank you for your daily check in!" }
         format.json { render :show, status: :created, location: @metric }
       else
         format.html { render :new, status: :unprocessable_entity }
