@@ -5,11 +5,25 @@ class MetricsController < ApplicationController
   def index
     @user = current_user
     @metrics = @user.metrics
+    @most_recent_metric = @user.metrics.last&.created_at&.to_date
 
     if @metrics.present?
       @weight_by_day = @metrics.group_by_day(:created_at).sum(:weight)
       @fat_percentage_by_day = @metrics.group_by_day(:created_at).average(:fat_percentage)
       @muscle_percentage_by_day = @metrics.group_by_day(:created_at).average(:muscle_percentage)
+
+      @fat_mass_by_day = {}
+      @muscle_mass_by_day = {}
+
+      @metrics.each do |metric|
+        date = metric.created_at.to_date
+        weight = metric.weight
+        fat_percentage = metric.fat_percentage
+        muscle_percentage = metric.muscle_percentage
+
+        @fat_mass_by_day[date] = (fat_percentage / 100.0) * weight
+        @muscle_mass_by_day[date] = (muscle_percentage / 100.0) * weight
+      end
     end
   end
 
