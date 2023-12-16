@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :muscle_percentages
+  resources :fat_percentages
+  resources :weights
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

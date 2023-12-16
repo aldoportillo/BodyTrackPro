@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @fat_percentage %>
+
+<div>
+  <%= link_to "Edit this fat percentage", edit_fat_percentage_path(@fat_percentage) %> |
+  <%= link_to "Back to fat percentages", fat_percentages_path %>
+
+  <%= button_to "Destroy this fat percentage", @fat_percentage, method: :delete %>
+</div>
