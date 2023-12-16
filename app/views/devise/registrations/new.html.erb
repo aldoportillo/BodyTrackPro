@@ -17,6 +17,16 @@
         </div>
 
         <div class="mb-3">
+          <%= f.label :height, "Height (in)", class: 'form-label' %>
+          <%= f.number_field :height, step: 1, class: 'form-control', required: true %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :sex, "Sex", class: 'form-label' %>
+          <%= f.select :sex, ['Male', 'Female'], {}, { class: 'form-select', required: true } %>
+        </div>
+
+        <div class="mb-3">
           <%= f.label :password, class: 'form-label' %>
           <% if @minimum_password_length %>
             <small class="form-text text-muted"><%= @minimum_password_length %> characters minimum</small>
