@@ -18,7 +18,7 @@ end_date = Date.today
 (start_date..end_date).each do |date|
   # Create a new metric record for each date
   user.metrics.create(
-    weight: rand(60..80), # Random weight
+    weight: rand(100..180), # Random weight
     fat_percentage: rand(10..25), # Random fat percentage
     muscle_percentage: rand(30..50), # Random muscle percentage
     created_at: date,
