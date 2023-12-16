@@ -3,7 +3,14 @@ class MetricsController < ApplicationController
 
   # GET /metrics or /metrics.json
   def index
-    @metrics = Metric.all
+    @user = current_user
+    @metrics = @user.metrics
+
+    if @metrics.present?
+      @weight_by_day = @metrics.group_by_day(:created_at).sum(:weight)
+      @fat_percentage_by_day = @metrics.group_by_day(:created_at).average(:fat_percentage)
+      @muscle_percentage_by_day = @metrics.group_by_day(:created_at).average(:muscle_percentage)
+    end
   end
 
   # GET /metrics/1 or /metrics/1.json
