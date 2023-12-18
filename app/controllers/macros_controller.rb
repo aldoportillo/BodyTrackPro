@@ -3,7 +3,9 @@ class MacrosController < ApplicationController
 
   # GET /macros or /macros.json
   def index
-    @macros = Macro.all
+    @user = current_user
+    @macros = @user.macros
+    @most_recent_macro = @macros.last
   end
 
   # GET /macros/1 or /macros/1.json
@@ -25,7 +27,7 @@ class MacrosController < ApplicationController
 
     respond_to do |format|
       if @macro.save
-        format.html { redirect_to macro_url(@macro), notice: "Macro was successfully created." }
+        format.html { redirect_to macros_url, notice: "Macro was successfully created." }
         format.json { render :show, status: :created, location: @macro }
       else
         format.html { render :new, status: :unprocessable_entity }
