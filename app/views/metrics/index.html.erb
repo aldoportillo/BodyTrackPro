@@ -5,9 +5,8 @@
       <%= link_to "Daily Check In", new_metric_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#newMetricModal", "data-url": new_metric_path %>
     <% end %>
   </div>
-  <%= @most_recent_metric.weight %>
-  <%= @bmi %>
-  <%= current_user.height %>
+  <%= @bmi&.round(2) %>
+
   <div class="scrollable-chart">
     <%= line_chart [
         {name: "Total Weight", data: @weight_by_day},
