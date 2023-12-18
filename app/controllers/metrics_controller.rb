@@ -5,15 +5,16 @@ class MetricsController < ApplicationController
   def index
     @user = current_user
     @metrics = @user.metrics
-    @most_recent_metric = @metrics.last&.created_at&.to_date
+    @most_recent_metric = @metrics.last
   
     return unless @metrics.present?
   
     @weight_by_day = @metrics.group_by_day(:created_at).sum(:weight)
     @fat_percentage_by_day = @metrics.group_by_day(:created_at).average(:fat_percentage)
     @muscle_percentage_by_day = @metrics.group_by_day(:created_at).average(:muscle_percentage)
-  
+    calculate_bmi
     calculate_body_composition
+    
   end
 
   # GET /metrics/1 or /metrics/1.json
@@ -86,5 +87,14 @@ class MetricsController < ApplicationController
       @fat_mass_by_day[date] = (fat_percentage / 100.0) * weight
       @muscle_mass_by_day[date] = (muscle_percentage / 100.0) * weight
     end
+  end
+
+  def calculate_bmi
+    weight = @most_recent_metric.weight
+    height = current_user.height
+
+    @bmi = (weight / (height * height)) * 703
+
+    return @bmi
   end
 end
