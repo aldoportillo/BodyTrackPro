@@ -15,16 +15,16 @@
     <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
   </head>
-
-  <body>
+  <body class="bg-dark text-white">
     <header>
       <%= render partial: "shared/navbar" %>
     </header>
+
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <p class="alert alert-success text-dark"><%= notice %></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class="alert alert-danger text-dark"><%= alert %></p>
     <% end %>
 
     <%= yield %>
