@@ -11,42 +11,41 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :fat, style: "display: block" %>
-    <%= form.text_field :fat %>
-  </div>
-
-  <div>
-    <%= form.label :protein, style: "display: block" %>
-    <%= form.text_field :protein %>
-  </div>
-
-  <div>
-    <%= form.label :carb, style: "display: block" %>
-    <%= form.text_field :carb %>
-  </div>
-
-  <div>
+  <div class="mb-3">
     <%= form.label :calories, style: "display: block" %>
-    <%= form.text_field :calories %>
+    <%= form.text_field :calories, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="mb-3">
+    <%= form.label :fat, style: "display: block" %>
+    <%= form.text_field :fat, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :carb, style: "display: block" %>
+    <%= form.text_field :carb, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
     <%= form.label :sugar, style: "display: block" %>
-    <%= form.text_field :sugar %>
+    <%= form.text_field :sugar, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="mb-3">
     <%= form.label :added_sugar, style: "display: block" %>
-    <%= form.text_field :added_sugar %>
+    <%= form.text_field :added_sugar, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :protein, style: "display: block" %>
+    <%= form.text_field :protein, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="text-center">
+    <%= form.submit class: 'btn btn-primary'%>
   </div>
 <% end %>
