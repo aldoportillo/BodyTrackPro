@@ -15,24 +15,16 @@
     <div class="col">
       <div class="card bg-secondary text-white">
         <div class="card-body">
-          <h5 class="card-title">Calories</h5>
-          <p class="card-text">2500</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card bg-secondary text-white">
-        <div class="card-body">
           <h5 class="card-title">Fat</h5>
-          <p class="card-text">50</p>
+          <p class="card-text"><%= current_user.fat %></p>
         </div>
       </div>
     </div>
     <div class="col">
       <div class="card bg-secondary text-white">
         <div class="card-body">
-          <h5 class="card-title">Carb</h5>
-          <p class="card-text">150</p>
+          <h5 class="card-title">Carbs</h5>
+          <p class="card-text"><%= current_user.carb %></p>
         </div>
       </div>
     </div>
@@ -40,7 +32,7 @@
       <div class="card bg-secondary text-white">
         <div class="card-body">
           <h5 class="card-title">Protein</h5>
-          <p class="card-text">200</p>
+          <p class="card-text"><%= current_user.protein %></p>
         </div>
       </div>
     </div>
