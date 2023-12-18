@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Macros</h1>
-
-<div id="macros">
-  <% @macros.each do |macro| %>
-    <%= render macro %>
-    <p>
-      <%= link_to "Show this macro", macro %>
-    </p>
-  <% end %>
+<div class="container mt-3 bg-dark text-white">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="text-white">Macros</h1>
+    </div>
+    <div class="col text-end">
+      <% if @most_recent_macro&.created_at&.to_date != Date.today %>
+        <%= link_to "Log Macros", new_macro_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#newMacroModal", "data-url": new_macro_path %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
-<%= link_to "New macro", new_macro_path %>
+<div class="modal fade" id="newMacroModal" tabindex="-1" aria-labelledby="newMacroModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newMacroModalLabel">Today's Macros</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', macro: Macro.new %>
+      </div>
+    </div>
+  </div>
+</div>
