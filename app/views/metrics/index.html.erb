@@ -5,12 +5,14 @@
       <%= link_to "Daily Check In", new_metric_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#newMetricModal", "data-url": new_metric_path %>
     <% end %>
   </div>
-
-  <%= line_chart [
-    {name: "Total Weight", data: @weight_by_day},
-    {name: "Fat Mass", data: @fat_mass_by_day},
-    {name: "Muscle Mass", data: @muscle_mass_by_day}
-  ], id: "combined-chart", xtitle: "Date", ytitle: "Pounds" %>
+  
+  <div class="scrollable-chart">
+    <%= line_chart [
+      {name: "Total Weight", data: @weight_by_day},
+      {name: "Fat Mass", data: @fat_mass_by_day},
+      {name: "Muscle Mass", data: @muscle_mass_by_day}
+    ], id: "combined-chart", xtitle: "Date", ytitle: "Pounds" %>
+  </div>
 </div>
 
 <div class="modal fade" id="newMetricModal" tabindex="-1" aria-labelledby="newMetricModalLabel" aria-hidden="true">
@@ -27,3 +29,15 @@
   </div>
 </div>
 
+<style>
+
+.scrollable-chart {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+#combined-chart {
+  display: inline-block;
+  width: auto; /* Adjust this based on your needs */
+  min-width: 1000px; /* This should be large enough to accommodate all points */
+}
+</style>
