@@ -42,6 +42,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_220417) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.float "height"
+    t.integer "carb"
+    t.integer "fat"
+    t.integer "protein"
     t.date "dob"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
