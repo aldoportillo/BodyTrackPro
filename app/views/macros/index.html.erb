@@ -9,6 +9,7 @@
       <% end %>
     </div>
   </div>
+
   <h2 class="text-white">Target Macros</h2>
   <div class="row text-center mb-4">
     <div class="col">
@@ -44,6 +45,21 @@
       </div>
     </div>
   </div>
+
+  <% if @most_recent_macro&.created_at&.to_date == Date.today %>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-white">Today's Macros Ratio</h2>
+      <%= pie_chart @macro_data.map { |macro, values| [macro, values[:percentage]] } %>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="text-white">Target Macro Ratio</h2>
+      <%= pie_chart @target_macro_data %>
+    </div>
+  </div>
+<% end %>
+
   <div class="row">
     <h2 class="text-white">Macros History</h2>
     <div class="col">
@@ -80,3 +96,15 @@
     </div>
   </div>
 </div>
+
+<style>
+.scrollable-chart {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+#mass-chart, #percentage-chart {
+  display: inline-block;
+  width: auto; /* Adjust this based on your needs */
+  min-width: 1000px; /* This should be large enough to accommodate all points */
+}
+</style>

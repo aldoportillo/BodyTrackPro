@@ -16,6 +16,24 @@ class MacrosController < ApplicationController
     @carb_by_day = @macros.group_by_day(:created_at).sum(:carb)
     @sugar_by_day = @macros.group_by_day(:created_at).sum(:sugar)
     @added_sugar_by_day = @macros.group_by_day(:created_at).sum(:added_sugar) 
+
+    if @most_recent_macro
+      total_macros = @most_recent_macro.fat + @most_recent_macro.protein + @most_recent_macro.carb
+      @macro_data = {
+        "Fat" => {
+          percentage: (@most_recent_macro.fat / total_macros.to_f) * 100,
+          grams: @most_recent_macro.fat
+        },
+        "Protein" => {
+          percentage: (@most_recent_macro.protein / total_macros.to_f) * 100,
+          grams: @most_recent_macro.protein
+        },
+        "Carbs" => {
+          percentage: (@most_recent_macro.carb / total_macros.to_f) * 100,
+          grams: @most_recent_macro.carb
+        }
+      }
+    end
   end
 
   # GET /macros/1 or /macros/1.json
