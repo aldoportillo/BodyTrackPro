@@ -44,7 +44,26 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <h2 class="text-white">Macros History</h2>
+    <div class="col">
+      <div class="scrollable-chart">
+        <%= line_chart [
+            {name: "Fat", data: @fat_by_day}, 
+            {name: "Carb", data: @carb_by_day},
+            {name: "Protein", data: @protein_by_day},
+            {name: "Sugar", data: @sugar_by_day},
+            {name: "Added Sugar", data: @added_sugar_by_day}
+          ], 
+          id: "mass-chart", 
+          xtitle: "Date", 
+          ytitle: "Grams"
+        %>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 
 

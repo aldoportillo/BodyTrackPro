@@ -1,11 +1,21 @@
 class MacrosController < ApplicationController
   before_action :set_macro, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
   # GET /macros or /macros.json
   def index
     @user = current_user
     @macros = @user.macros
     @most_recent_macro = @macros.last
+
+    return unless @macros.present?
+  
+    @calories_by_day = @macros.group_by_day(:created_at).sum(:calories)
+    @fat_by_day = @macros.group_by_day(:created_at).sum(:fat)
+    @protein_by_day = @macros.group_by_day(:created_at).sum(:protein)
+    @carb_by_day = @macros.group_by_day(:created_at).sum(:carb)
+    @sugar_by_day = @macros.group_by_day(:created_at).sum(:sugar)
+    @added_sugar_by_day = @macros.group_by_day(:created_at).sum(:added_sugar) 
   end
 
   # GET /macros/1 or /macros/1.json
