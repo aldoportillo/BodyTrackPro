@@ -33,9 +33,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       # t.datetime :locked_at
 
       t.float :height
-      t.integer :carb
-      t.integer :fat
-      t.integer :protein
       t.date :dob
 
       t.timestamps null: false

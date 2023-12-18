@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_18_220417) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_18_232359) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,6 +35,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_220417) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "target_macros", force: :cascade do |t|
+    t.float "carb"
+    t.float "fat"
+    t.float "protein"
+    t.float "calories"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -42,9 +52,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_220417) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.float "height"
-    t.integer "carb"
-    t.integer "fat"
-    t.integer "protein"
     t.date "dob"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
