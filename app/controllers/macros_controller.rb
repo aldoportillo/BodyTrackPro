@@ -33,6 +33,15 @@ class MacrosController < ApplicationController
           grams: @most_recent_macro.carb
         }
       }
+
+      if current_user.fat && current_user.protein && current_user.carb
+        total_target_macros = current_user.fat + current_user.protein + current_user.carb
+        @target_macro_data = {
+          "Fat" => (current_user.fat / total_target_macros.to_f) * 100,
+          "Protein" => (current_user.protein / total_target_macros.to_f) * 100,
+          "Carbs" => (current_user.carb / total_target_macros.to_f) * 100
+        }
+      end
     end
   end
 
