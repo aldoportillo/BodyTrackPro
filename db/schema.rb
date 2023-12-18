@@ -10,28 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_18_195619) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_16_184339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "fat_percentages", force: :cascade do |t|
-    t.integer "percent"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "metrics", force: :cascade do |t|
-    t.integer "weight"
-    t.integer "fat_percentage"
-    t.integer "muscle_percentage"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "muscle_percentages", force: :cascade do |t|
-    t.integer "percent"
+    t.float "weight"
+    t.float "fat_percentage"
+    t.float "muscle_percentage"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,20 +29,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_18_195619) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "height"
+    t.float "height"
+    t.integer "carb"
+    t.integer "fat"
+    t.integer "protein"
     t.date "dob"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "sex"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "weights", force: :cascade do |t|
-    t.integer "pounds"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end
