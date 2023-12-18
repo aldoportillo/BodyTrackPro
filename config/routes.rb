@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :macros
   devise_for :users
   resources :metrics
   

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @macro %>
+
+<div>
+  <%= link_to "Edit this macro", edit_macro_path(@macro) %> |
+  <%= link_to "Back to macros", macros_path %>
+
+  <%= button_to "Destroy this macro", @macro, method: :delete %>
+</div>

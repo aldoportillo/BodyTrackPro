@@ -1,0 +1,52 @@
+<%= form_with(model: macro) do |form| %>
+  <% if macro.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(macro.errors.count, "error") %> prohibited this macro from being saved:</h2>
+
+      <ul>
+        <% macro.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :fat, style: "display: block" %>
+    <%= form.text_field :fat %>
+  </div>
+
+  <div>
+    <%= form.label :protein, style: "display: block" %>
+    <%= form.text_field :protein %>
+  </div>
+
+  <div>
+    <%= form.label :carb, style: "display: block" %>
+    <%= form.text_field :carb %>
+  </div>
+
+  <div>
+    <%= form.label :calories, style: "display: block" %>
+    <%= form.text_field :calories %>
+  </div>
+
+  <div>
+    <%= form.label :sugar, style: "display: block" %>
+    <%= form.text_field :sugar %>
+  </div>
+
+  <div>
+    <%= form.label :added_sugar, style: "display: block" %>
+    <%= form.text_field :added_sugar %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
