@@ -8,10 +8,27 @@
   
   <div class="scrollable-chart">
     <%= line_chart [
-      {name: "Total Weight", data: @weight_by_day},
-      {name: "Fat Mass", data: @fat_mass_by_day},
-      {name: "Muscle Mass", data: @muscle_mass_by_day}
-    ], id: "combined-chart", xtitle: "Date", ytitle: "Pounds" %>
+        {name: "Total Weight", data: @weight_by_day},
+        {name: "Fat Mass", data: @fat_mass_by_day},
+        {name: "Muscle Mass", data: @muscle_mass_by_day}
+      ], 
+      id: "mass-chart", 
+      xtitle: "Date", 
+      ytitle: "Pounds",
+      library: {title: "Mass Chart"} 
+    %>
+  </div>
+  <div class="scrollable-chart">
+    <%= line_chart [
+        {name: "Fat Percentage", data: @fat_percentage_by_day},
+        {name: "Muscle Percentage", data: @muscle_percentage_by_day}
+      ], 
+      id: "percentage-chart", 
+      xtitle: "Date", 
+      ytitle: "Percent", 
+      library: {title: "Percentage Chart"} 
+    %>
+
   </div>
 </div>
 

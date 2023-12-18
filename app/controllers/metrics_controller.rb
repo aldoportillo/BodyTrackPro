@@ -5,26 +5,15 @@ class MetricsController < ApplicationController
   def index
     @user = current_user
     @metrics = @user.metrics
-    @most_recent_metric = @user.metrics.last&.created_at&.to_date
-
-    if @metrics.present?
-      @weight_by_day = @metrics.group_by_day(:created_at).sum(:weight)
-      @fat_percentage_by_day = @metrics.group_by_day(:created_at).average(:fat_percentage)
-      @muscle_percentage_by_day = @metrics.group_by_day(:created_at).average(:muscle_percentage)
-
-      @fat_mass_by_day = {}
-      @muscle_mass_by_day = {}
-
-      @metrics.each do |metric|
-        date = metric.created_at.to_date
-        weight = metric.weight
-        fat_percentage = metric.fat_percentage
-        muscle_percentage = metric.muscle_percentage
-
-        @fat_mass_by_day[date] = (fat_percentage / 100.0) * weight
-        @muscle_mass_by_day[date] = (muscle_percentage / 100.0) * weight
-      end
-    end
+    @most_recent_metric = @metrics.last&.created_at&.to_date
+  
+    return unless @metrics.present?
+  
+    @weight_by_day = @metrics.group_by_day(:created_at).sum(:weight)
+    @fat_percentage_by_day = @metrics.group_by_day(:created_at).average(:fat_percentage)
+    @muscle_percentage_by_day = @metrics.group_by_day(:created_at).average(:muscle_percentage)
+  
+    calculate_body_composition
   end
 
   # GET /metrics/1 or /metrics/1.json
@@ -74,13 +63,28 @@ class MetricsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_metric
-      @metric = Metric.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_metric
+    @metric = Metric.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def metric_params
-      params.require(:metric).permit(:weight, :fat_percentage, :muscle_percentage, :user_id)
+  # Only allow a list of trusted parameters through.
+  def metric_params
+    params.require(:metric).permit(:weight, :fat_percentage, :muscle_percentage, :user_id)
+  end
+
+  def calculate_body_composition
+    @fat_mass_by_day = {}
+    @muscle_mass_by_day = {}
+  
+    @metrics.each do |metric|
+      date = metric.created_at.to_date
+      weight = metric.weight
+      fat_percentage = metric.fat_percentage
+      muscle_percentage = metric.muscle_percentage 
+
+      @fat_mass_by_day[date] = (fat_percentage / 100.0) * weight
+      @muscle_mass_by_day[date] = (muscle_percentage / 100.0) * weight
     end
+  end
 end
