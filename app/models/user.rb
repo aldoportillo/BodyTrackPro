@@ -64,6 +64,10 @@ class User < ApplicationRecord
     bmr * activity_multiplier
   end
 
+  def admin?
+    self.email == "aldoportillodev@gmail.com"
+  end
+
   private
 
   def most_recent_metric
