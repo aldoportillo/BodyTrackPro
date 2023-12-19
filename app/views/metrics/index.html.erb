@@ -6,6 +6,8 @@
     <div class="col text-end">
       <% if @most_recent_metric&.created_at&.to_date != Date.today %>
         <%= link_to "Daily Check In", new_metric_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#newMetricModal", "data-url": new_metric_path %>
+      <% else %>
+        <%= link_to "Update Check In", edit_metric_path(@most_recent_metric), class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#editMetricModal", "data-url": edit_metric_path(@most_recent_metric) %>
       <% end %>
     </div>
   </div>
@@ -99,7 +101,21 @@
   </div>
 </div>
 
-<!-- Styles -->
+<div class="modal fade" id="editMetricModal" tabindex="-1" aria-labelledby="editMetricModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editMetricModalLabel">Edit Metric</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', metric: @most_recent_metric %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <style>
 .scrollable-chart {
   overflow-x: auto;

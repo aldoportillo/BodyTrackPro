@@ -1,1 +1,68 @@
-<h1>Landing Page</h1>
+<section class="bg-primary text-white text-center py-5">
+  <h1>Welcome to BodyTrackPro</h1>
+  <p>Track your fitness journey and achieve your health goals</p>
+</section>
+
+<section class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h2>Track Your Progress</h2>
+      <p>BodyTrackPro helps you monitor your fitness journey, keeping track of your weight, muscle mass, fat percentage and overall health metrics. Stay motivated and informed every step of the way!</p>
+      <p>Whether you're looking to lose weight, build muscle, or maintain your current fitness level, BodyTrackPro is your ideal companion.</p>
+      <a href="/users/sign_up" class="btn btn-primary">Get Started</a>
+    </div>
+    <div class="col-md-6 d-flex align-items-center">
+      <%= image_tag("lifting.svg", alt: "lifting-icon", class: "img-fluid") %>
+    </div>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6 d-flex align-items-center">
+      <%= image_tag("eating.svg", alt: "eating-icon", class: "img-fluid") %>
+    </div>
+    <div class="col-md-6">
+      <h2>Adjust your Macros</h2>
+      <p>BodyTrackPro helps you estimate your daily caloric needs and macronutrient requirements based on your fitness goals. You can then track your daily food intake and compare it to your targets.</p>
+      <p>BodyTrackPro also provides detailed analytics on your macronutrient intake, helping you identify areas for improvement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h2>Neat on the Rocks</h2>
+      <p>Alcohol plays a role in everyone's life, whether it's a glass of wine with dinner or a night out with friends. Our team has another application that helps you track your alcohol consumption and get macronutrients from cocktails.</p>
+      <p>Check out Neat on the Rocks and start tracking your alcohol consumption today! Further integration will allow consumed cocktails to be added here.</p>
+      <a href="https://www.neatonthe.rocks/nutrition" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Cocktail Macronutrient Tracker</a>
+    </div>
+    <div class="col-md-6 d-flex align-items-center">
+      <%= image_tag("bartender.svg", alt: "bartender-icon", class: "img-fluid") %>
+    </div>
+  </div>
+</section>
+
+<section class="bg-dark py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Our Trackers</h2>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <i class="bi bi-bar-chart-line-fill" style="font-size: 2rem;"></i>
+        <h3>Macronutrient</h3>
+        <p>Track your daily macronutrient intake and compare it to your targets. Future updates include syncing with MFP.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="bi bi-heart-pulse" style="font-size: 2rem;"></i>
+        <h3>Body Composition</h3>
+        <p>Track your weight, muscle mass, and fat percentage over time.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <i class="bi bi-calendar-check" style="font-size: 2rem;"></i>
+        <h3>Activity</h3>
+        <p>Track your daily activity and calories burned. Future updates include smart device integration</p>
+      </div>
+    </div>
+  </div>
+</section>

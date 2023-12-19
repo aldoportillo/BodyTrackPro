@@ -77,7 +77,7 @@ class MacrosController < ApplicationController
   def update
     respond_to do |format|
       if @macro.update(macro_params)
-        format.html { redirect_to macro_url(@macro), notice: "Macro was successfully updated." }
+        format.html { redirect_to macros_url, notice: "Macro was successfully updated." }
         format.json { render :show, status: :ok, location: @macro }
       else
         format.html { render :edit, status: :unprocessable_entity }
