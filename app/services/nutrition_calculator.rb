@@ -1,7 +1,8 @@
 class NutritionCalculator
-    def initialize(user, goal)
+    def initialize(user, goal, activity)
       @user = user
       @goal = goal
+      @activity = activity
     end
   
     def calculate_macros
@@ -19,28 +20,28 @@ class NutritionCalculator
   
     def calculate_for_weight_loss
       
-      total_calories = @user.tdee - 250 
+      total_calories = @user.tdee(@activity) - 250 
       {
         protein: (total_calories * 0.40) / 4, # 40% from protein
         fat: (total_calories * 0.30) / 9,    # 30% from fats
-        carbs: (total_calories * 0.30) / 4  # 30% from carbs
+        carb: (total_calories * 0.30) / 4  # 30% from carbs
       }
     end
 
     def calculate_for_muscle_gain
-        total_calories = @user.tdee + 300 
+        total_calories = @user.tdee(@activity) + 300 
         {
           protein: (total_calories * 0.30) / 4, # 30% from protein
-          carbs: (total_calories * 0.50) / 4,   # 50% from carbs
+          carb: (total_calories * 0.50) / 4,   # 50% from carbs
           fat: (total_calories * 0.20) / 9      # 20% from fats
         }
     end
 
     def calculate_for_maintenance
-        total_calories = @user.tdee
+        total_calories = @user.tdee(@activity)
         {
           protein: (total_calories * 0.25) / 4, # 25% from protein
-          carbs: (total_calories * 0.55) / 4,   # 55% from carbs
+          carb: (total_calories * 0.55) / 4,   # 55% from carbs
           fat: (total_calories * 0.20) / 9      # 20% from fats
         }
     end
