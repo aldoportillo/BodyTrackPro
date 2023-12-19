@@ -1,0 +1,102 @@
+<div class="container mt-3 bg-dark text-white">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="text-white">Macros</h1>
+    </div>
+    <div class="col text-end">
+      <% if @most_recent_macro&.created_at&.to_date != Date.today %>
+        <%= link_to "Log Macros", new_macro_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#newMacroModal", "data-url": new_macro_path %>
+      <% end %>
+    </div>
+  </div>
+
+  <h2 class="text-white">Target Macros</h2>
+  <div class="row text-center mb-4">
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">Fat</h5>
+          <p class="card-text"><%= current_user.fat %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">Carbs</h5>
+          <p class="card-text"><%= current_user.carb %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">Protein</h5>
+          <p class="card-text"><%= current_user.protein %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @most_recent_macro&.created_at&.to_date == Date.today %>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-white">Today's Macros Ratio</h2>
+      <%= pie_chart @macro_data.map { |macro, values| [macro, values[:percentage]] } %>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="text-white">Target Macro Ratio</h2>
+      <%= pie_chart @target_macro_data %>
+    </div>
+  </div>
+<% end %>
+
+  <div class="row">
+    <h2 class="text-white">Macros History</h2>
+    <div class="col">
+      <div class="scrollable-chart">
+        <%= line_chart [
+            {name: "Fat", data: @fat_by_day}, 
+            {name: "Carb", data: @carb_by_day},
+            {name: "Protein", data: @protein_by_day},
+            {name: "Sugar", data: @sugar_by_day},
+            {name: "Added Sugar", data: @added_sugar_by_day}
+          ], 
+          id: "mass-chart", 
+          xtitle: "Date", 
+          ytitle: "Grams"
+        %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="newMacroModal" tabindex="-1" aria-labelledby="newMacroModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newMacroModalLabel">Today's Macros</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', macro: Macro.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.scrollable-chart {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+#mass-chart, #percentage-chart {
+  display: inline-block;
+  width: auto; /* Adjust this based on your needs */
+  min-width: 1000px; /* This should be large enough to accommodate all points */
+}
+</style>

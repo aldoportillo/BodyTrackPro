@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Target macros</h1>
+
+<div id="target_macros">
+  <% @target_macros.each do |target_macro| %>
+    <%= render target_macro %>
+    <p>
+      <%= link_to "Show this target macro", target_macro %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New target macro", new_target_macro_path %>

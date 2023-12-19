@@ -1,0 +1,51 @@
+<%= form_with(model: macro) do |form| %>
+  <% if macro.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(macro.errors.count, "error") %> prohibited this macro from being saved:</h2>
+
+      <ul>
+        <% macro.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :calories, style: "display: block" %>
+    <%= form.text_field :calories, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :fat, style: "display: block" %>
+    <%= form.text_field :fat, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :carb, style: "display: block" %>
+    <%= form.text_field :carb, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :sugar, style: "display: block" %>
+    <%= form.text_field :sugar, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :added_sugar, style: "display: block" %>
+    <%= form.text_field :added_sugar, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :protein, style: "display: block" %>
+    <%= form.text_field :protein, class: 'form-control' %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="text-center">
+    <%= form.submit class: 'btn btn-primary'%>
+  </div>
+<% end %>

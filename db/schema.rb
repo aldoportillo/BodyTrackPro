@@ -10,14 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_18_195619) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_18_232359) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "macros", force: :cascade do |t|
+    t.float "fat"
+    t.float "protein"
+    t.float "carb"
+    t.float "calories"
+    t.float "sugar"
+    t.float "added_sugar"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "metrics", force: :cascade do |t|
     t.float "weight"
     t.float "fat_percentage"
     t.float "muscle_percentage"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "target_macros", force: :cascade do |t|
+    t.float "carb"
+    t.float "fat"
+    t.float "protein"
+    t.float "calories"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

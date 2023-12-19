@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resource :target_macro, only: [:show, :edit, :update]
+  resources :macros
   devise_for :users
   resources :metrics
   

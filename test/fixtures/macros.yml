@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fat: 1.5
+  protein: 1.5
+  carb: 1.5
+  calories: 1.5
+  sugar: 1.5
+  added_sugar: 1.5
+  user_id: 1
+
+two:
+  fat: 1.5
+  protein: 1.5
+  carb: 1.5
+  calories: 1.5
+  sugar: 1.5
+  added_sugar: 1.5
+  user_id: 1

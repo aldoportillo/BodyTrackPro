@@ -11,6 +11,8 @@
 #Get sample user alice or create one
 user = User.first || User.create(email: "alice@x.com", password: "password", sex: "female", height: 63)
 
+user.metrics.destroy_all
+user.macros.destroy_all
 # Define a range of dates for which you want to create metrics
 start_date = 30.days.ago.to_date
 end_date = Date.today
@@ -24,4 +26,19 @@ end_date = Date.today
     created_at: date,
     updated_at: date
   )
+end
+
+(start_date..end_date).each do |date|
+
+  user.macros.create(
+    calories: rand(1500..2500), 
+    fat: rand(30..40), 
+    carb: rand(100..200),
+    protein: rand(100..200),
+    sugar: rand(0..50),
+    added_sugar: rand(0..50),
+    created_at: date,
+    updated_at: date
+  )
+
 end

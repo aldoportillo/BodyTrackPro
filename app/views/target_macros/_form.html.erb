@@ -1,0 +1,19 @@
+<% if @target_macro %>
+  <%= form_with(model: @target_macro, url: target_macro_path, local: true, method: :patch) do |f| %>
+    <div class="field">
+      <%= f.label :fat %>
+      <%= f.number_field :fat, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label :protein %>
+      <%= f.number_field :protein, class: 'form-control' %>
+    </div>
+    <div class="field">
+      <%= f.label :carbs %>
+      <%= f.number_field :carb, class: 'form-control' %>
+    </div>
+    <div class="text-center">
+      <%= f.submit 'Update Target Macros', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>
