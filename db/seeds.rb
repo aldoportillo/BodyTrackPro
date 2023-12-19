@@ -9,7 +9,7 @@
 #   end
 
 #Get sample user alice or create one
-user = User.first || User.create(email: "alice@x.com", password: "password", sex: "female", height: 63)
+user = User.first || User.create(email: "alice@x.com", password: "password", sex: "female", height: 63, dob: 30.years.ago)
 
 user.metrics.destroy_all
 user.macros.destroy_all
