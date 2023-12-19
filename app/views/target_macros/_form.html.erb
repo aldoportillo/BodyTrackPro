@@ -13,6 +13,7 @@
       <%= f.number_field :carb, class: 'form-control' %>
     </div>
     <div class="text-center">
+      <%= button_tag 'Estimate Macros', type: 'button', class: 'btn btn-secondary', data: { bs_toggle: 'modal', bs_target: '#estimateMacrosModal' } %>
       <%= f.submit 'Update Target Macros', class: 'btn btn-primary' %>
     </div>
   <% end %>

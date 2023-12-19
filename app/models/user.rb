@@ -50,11 +50,11 @@ class User < ApplicationRecord
 
   def tdee(activity_level)
     activity_multiplier = case activity_level
-                          when 'Sedentary' then 1.2
-                          when 'Lightly active' then 1.375
-                          when 'Moderately active' then 1.55
-                          when 'Very active' then 1.725
-                          when 'Super active' then 1.9
+                          when 'sedentary' then 1.2
+                          when 'lightly active' then 1.375
+                          when 'moderately active' then 1.55
+                          when 'very active' then 1.725
+                          when 'super active' then 1.9
                           else 1.2
                           end
     bmr * activity_multiplier

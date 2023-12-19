@@ -1,5 +1,5 @@
 class TargetMacrosController < ApplicationController
-  before_action :set_or_create_target_macro, only: [:show, :edit, :update]
+  before_action :set_or_create_target_macro, only: [:show, :edit, :update, :estimate]
 
   # GET /target_macros/1 or /target_macros/1.json
   def show
@@ -42,6 +42,14 @@ class TargetMacrosController < ApplicationController
       format.html { redirect_to target_macros_url, notice: "Target macro was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def estimate
+
+    @estimated_macros = NutritionCalculator.new(current_user, params[:goal], params[:activity_level]).calculate_macros
+
+    flash.now[:notice] = "Estimated macros for #{params[:goal]} goal and #{params[:activity_level]} activity level. Please input these values in Edit Target Macros to save."
+    render :show
   end
 
   private
