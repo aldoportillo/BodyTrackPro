@@ -30,9 +30,10 @@ class User < ApplicationRecord
     latest_metric = most_recent_metric
     return nil unless latest_metric && height && age && sex
 
-    weight_kg = latest_metric.weight * 0.453592 # Assuming weight is stored in pounds
-    height_cm = height * 2.54 # Assuming height is in inches
+    weight_kg = latest_metric.weight * 0.453592
+    height_cm = height * 2.54 
 
+    #Based off: Mifflin-St Jeor Equation for BMR
     if sex == 'Male'
       10 * weight_kg + 6.25 * height_cm - 5 * age + 5
     else
