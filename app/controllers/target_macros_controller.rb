@@ -1,22 +1,17 @@
 class TargetMacrosController < ApplicationController
-  before_action :set_target_macro, only: %i[ show edit update destroy ]
-
-  # GET /target_macros or /target_macros.json
-  def index
-    @target_macros = TargetMacro.all
-  end
 
   # GET /target_macros/1 or /target_macros/1.json
   def show
-  end
-
-  # GET /target_macros/new
-  def new
-    @target_macro = TargetMacro.new
+    @target_macro = current_user.target_macro || current_user.build_target_macros(fat: 0, protein: 0, carb: 0)
   end
 
   # GET /target_macros/1/edit
   def edit
+    @target_macro = current_user.target_macro
+    if @target_macro.nil?
+      @target_macro = current_user.build_target_macros(fat: 0, protein: 0, carb: 0)
+      @target_macro.save
+    end
   end
 
   # POST /target_macros or /target_macros.json
@@ -36,14 +31,11 @@ class TargetMacrosController < ApplicationController
 
   # PATCH/PUT /target_macros/1 or /target_macros/1.json
   def update
-    respond_to do |format|
-      if @target_macro.update(target_macro_params)
-        format.html { redirect_to target_macro_url(@target_macro), notice: "Target macro was successfully updated." }
-        format.json { render :show, status: :ok, location: @target_macro }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @target_macro.errors, status: :unprocessable_entity }
-      end
+    @target_macro = current_user.target_macro
+    if @target_macro.update(target_macro_params)
+      redirect_to target_macro_path, notice: 'Target macros were successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -58,13 +50,9 @@ class TargetMacrosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_target_macro
-      @target_macro = TargetMacro.find(params[:id])
-    end
 
     # Only allow a list of trusted parameters through.
     def target_macro_params
-      params.require(:target_macro).permit(:carb, :fat, :protein, :calories, :user_id)
+      params.require(:target_macro).permit(:carb, :fat, :protein, :calories)
     end
 end
