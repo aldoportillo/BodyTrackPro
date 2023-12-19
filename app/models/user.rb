@@ -20,6 +20,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  validates :height, presence: true, numericality: { greater_than: 0 }
+  validates :dob, presence: true, date: { before: -> { Date.current } }
+  validates :sex, presence: true
+
   has_one :target_macro, dependent: :destroy
   has_many :metrics, dependent: :destroy
   has_many :macros, dependent: :destroy
