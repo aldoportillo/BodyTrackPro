@@ -1,10 +1,50 @@
-<p style="color: green"><%= notice %></p>
+<div class="container mt-3 bg-dark text-white">
+  <div class="row mb-4">
+    <div class="col">
+      <h1 class="text-white">Target Macros</h1>
+    </div>
+    <div class="col text-end">
+        <%= link_to "Edit Target Macros", edit_target_macro_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#editTargetMacroModal", "data-url": edit_target_macro_path %>
+    </div>
+  </div>
+  <div class="row text-center mb-4">
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">Fat</h5>
+          <p class="card-text"><%= current_user.fat %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">Carbs</h5>
+          <p class="card-text"><%= current_user.carb %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">Protein</h5>
+          <p class="card-text"><%= current_user.protein %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render @target_macro %>
-
-<div>
-  <%= link_to "Edit this target macro", edit_target_macro_path(@target_macro) %> |
-  <%= link_to "Back to target macros", target_macros_path %>
-
-  <%= button_to "Destroy this target macro", @target_macro, method: :delete %>
+<div class="modal fade" id="editTargetMacroModal" tabindex="-1" aria-labelledby="editTargetMacroModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTargetMacroModalLabel">Today's Macros</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', macro: Macro.new %>
+      </div>
+    </div>
+  </div>
 </div>
