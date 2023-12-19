@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   delegate :fat, :protein, :carb, to: :target_macro, allow_nil: true
 
-  def rmr
+  def bmr
     latest_metric = most_recent_metric
     return nil unless latest_metric && height && age && sex
 
@@ -34,11 +34,30 @@ class User < ApplicationRecord
     height_cm = height * 2.54 
 
     #Based off: Mifflin-St Jeor Equation for BMR
+    #if sex == 'Male'
+    #  10 * weight_kg + 6.25 * height_cm - 5 * age + 5
+    #else
+    #  10 * weight_kg + 6.25 * height_cm - 5 * age - 161
+    #end
+
+    #Based off: Harris Benedict Equation for BMR
     if sex == 'Male'
-      10 * weight_kg + 6.25 * height_cm - 5 * age + 5
+      88.362 + (13.397 * weight_kg) + (4.799 * height_cm) - (5.677 * age)
     else
-      10 * weight_kg + 6.25 * height_cm - 5 * age - 161
+      447.593 + (9.247 * weight_kg) + (3.098 * height_cm) - (4.330 * age)
     end
+  end
+
+  def tdee(activity_level)
+    activity_multiplier = case activity_level
+                          when 'Sedentary' then 1.2
+                          when 'Lightly active' then 1.375
+                          when 'Moderately active' then 1.55
+                          when 'Very active' then 1.725
+                          when 'Super active' then 1.9
+                          else 1.2
+                          end
+    bmr * activity_multiplier
   end
 
   private
