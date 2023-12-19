@@ -19,13 +19,8 @@
     <header>
       <%= render partial: "shared/navbar" %>
     </header>
-
-    <% if notice %>
-      <p class="alert alert-success text-dark"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger text-dark"><%= alert %></p>
-    <% end %>
+    
+    <%= render "shared/flashes" %>
 
     <%= yield %>
   </body>
