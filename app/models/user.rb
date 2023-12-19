@@ -23,4 +23,6 @@ class User < ApplicationRecord
   has_one :target_macro, dependent: :destroy
   has_many :metrics, dependent: :destroy
   has_many :macros, dependent: :destroy
+
+  delegate :fat, :protein, :carb, to: :target_macro, allow_nil: true
 end
