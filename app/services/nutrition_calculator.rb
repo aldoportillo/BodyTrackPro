@@ -7,16 +7,16 @@ class NutritionCalculator
   
     def calculate_macros
       case @goal
-      when 'weight loss'
-        calculate_for_weight_loss
-      when 'muscle gain'
-        calculate_for_muscle_gain
-      when 'maintenance'
-        calculate_for_maintenance
+        when 'weight loss'
+          calculate_for_weight_loss
+        when 'muscle gain'
+          calculate_for_muscle_gain
+        when 'maintenance'
+          calculate_for_maintenance
       end
     end
   
-    private
+
   
     def calculate_for_weight_loss
       
