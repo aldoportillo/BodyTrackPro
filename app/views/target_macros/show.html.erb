@@ -1,7 +1,7 @@
 <div class="container mt-3 bg-dark text-white">
   <div class="row mb-4">
     <div class="col">
-      <h1 class="text-white">Target Macros</h1>
+      <h2 class="text-white">Target Macros</h2>
     </div>
     <div class="col text-end">
         <%= link_to "Edit Target Macros", edit_target_macro_path, class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#editTargetMacroModal", "data-url": edit_target_macro_path %>
@@ -40,38 +40,42 @@
         </div>
       </div>
     </div>
-    <div class="col">
-      <div class="card bg-secondary text-white">
-        <div class="card-body">
-          <h5 class="card-title">TDEE</h5>
-          <p class="card-text"><%= current_user.tdee('Very active').round(2) %></p>
+  </div>
+
+  <% if @estimated_macros.present? %>
+    <h2>Estimated Macros for Your Goals</h2>
+    <div id="estimated-macros" class="row text-center mb-4">
+      <div class="col">
+        <div class="card bg-secondary text-white">
+          <div class="card-body">
+            <h5 class="card-title">Protein</h5>
+            <p class="card-text"><%= @estimated_macros[:protein].round(2) %> g</p>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <%= @nutrition_info %>
-
-  <%= form_with url: estimate_macros_path, method: :post, local: true, data: { turbo: false }  do |form| %>
-  
-  <%= form.label :activity_level %>
-  <%= form.select :activity_level, options_for_select(['sedentary', 'lightly active', 'moderately active', 'very active', 'super active']), required: true %>
-
-  <%= form.label :goal %>
-  <%= form.select :goal, options_for_select(['weight loss', 'muscle gain', 'maintenance']), required: true %>
-
-  <%= form.submit "Estimate Macros" %>
-<% end %>
-
-<% if @estimated_macros.present? %>
-  <div id="estimated-macros">
-    <h3>Estimated Macros:</h3>
-    <p>Protein: <%= @estimated_macros[:protein] %> grams</p>
-    <p>Carbs: <%= @estimated_macros[:carbs] %> grams</p>
-    <p>Fats: <%= @estimated_macros[:fat] %> grams</p>
-  </div>
-<% end %>
+      <div class="col">
+        <div class="card bg-secondary text-white">
+          <div class="card-body">
+            <h5 class="card-title">Protein</h5>
+            <p class="card-text"><%= @estimated_macros[:carb].round(2) %> g</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-secondary text-white">
+          <div class="card-body">
+            <h5 class="card-title">Fats</h5>
+            <p class="card-text"><%= @estimated_macros[:fat].round(2) %> g</p>
+          </div>
+        </div>
+      </div>
+  <% end %>
 </div>
+
+
+
+
+
 
 <div class="modal fade" id="editTargetMacroModal" tabindex="-1" aria-labelledby="editTargetMacroModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -82,6 +86,34 @@
       </div>
       <div class="modal-body">
         <%= render 'form', macro: Macro.new %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="estimateMacrosModal" tabindex="-1" aria-labelledby="estimateMacrosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="estimateMacrosModalLabel">Estimate Macros</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= form_with url: target_macro_path, method: :post, local: true, data: { turbo: false } do |form| %>
+          <div class="mb-3">
+            <%= form.label :activity_level, class: 'form-label' %>
+            <%= form.select :activity_level, options_for_select(['sedentary', 'lightly active', 'moderately active', 'very active', 'super active']), {}, class: 'form-select' %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :goal, class: 'form-label' %>
+            <%= form.select :goal, options_for_select(['weight loss', 'muscle gain', 'maintenance']), {}, class: 'form-select' %>
+          </div>
+
+          <%= form.submit "Estimate Macros", class: 'btn btn-primary' %>
+        <% end %>
       </div>
     </div>
   </div>
