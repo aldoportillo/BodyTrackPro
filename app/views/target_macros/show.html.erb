@@ -35,7 +35,7 @@
     <div class="col">
       <div class="card bg-secondary text-white">
         <div class="card-body">
-          <h5 class="card-title">bmr</h5>
+          <h5 class="card-title">BMR</h5>
           <p class="card-text"><%= current_user.bmr.round(2) %> cal</p>
         </div>
       </div>
@@ -49,15 +49,15 @@
         <div class="card bg-secondary text-white">
           <div class="card-body">
             <h5 class="card-title">Protein</h5>
-            <p class="card-text"><%= @estimated_macros[:protein].round(2) %> g</p>
+            <p class="card-text"><%= @estimated_macros[:protein].round %> g</p>
           </div>
         </div>
       </div>
       <div class="col">
         <div class="card bg-secondary text-white">
           <div class="card-body">
-            <h5 class="card-title">Protein</h5>
-            <p class="card-text"><%= @estimated_macros[:carb].round(2) %> g</p>
+            <h5 class="card-title">Carbs</h5>
+            <p class="card-text"><%= @estimated_macros[:carb].round %> g</p>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
         <div class="card bg-secondary text-white">
           <div class="card-body">
             <h5 class="card-title">Fats</h5>
-            <p class="card-text"><%= @estimated_macros[:fat].round(2) %> g</p>
+            <p class="card-text"><%= @estimated_macros[:fat].round %> g</p>
           </div>
         </div>
       </div>
