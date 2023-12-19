@@ -25,4 +25,34 @@ class User < ApplicationRecord
   has_many :macros, dependent: :destroy
 
   delegate :fat, :protein, :carb, to: :target_macro, allow_nil: true
+
+  def rmr
+    latest_metric = most_recent_metric
+    return nil unless latest_metric && height && age && sex
+
+    weight_kg = latest_metric.weight * 0.453592 # Assuming weight is stored in pounds
+    height_cm = height * 2.54 # Assuming height is in inches
+
+    if sex == 'Male'
+      10 * weight_kg + 6.25 * height_cm - 5 * age + 5
+    else
+      10 * weight_kg + 6.25 * height_cm - 5 * age - 161
+    end
+  end
+
+  private
+
+  def most_recent_metric
+    metrics.order(created_at: :desc).first
+  end
+
+  def age     
+    return nil unless dob
+
+    now = Time.current.to_date
+    now.year - dob.year - (dob.to_date.change(year: now.year) > now ? 1 : 0)  
+  end
+
+  
+
 end
