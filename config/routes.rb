@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resource :target_macro, only: [:show, :edit, :update]
+  post 'target_macro', to: 'target_macros#estimate'
   resources :macros
   devise_for :users
   resources :metrics
