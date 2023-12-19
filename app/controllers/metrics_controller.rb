@@ -44,7 +44,7 @@ class MetricsController < ApplicationController
   def update
     respond_to do |format|
       if @metric.update(metric_params)
-        format.html { redirect_to metric_url(@metric), notice: "Metric was successfully updated." }
+        format.html { redirect_to metrics_url, notice: "Metric was successfully updated." }
         format.json { render :show, status: :ok, location: @metric }
       else
         format.html { render :edit, status: :unprocessable_entity }
