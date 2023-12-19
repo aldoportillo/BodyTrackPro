@@ -48,6 +48,7 @@ class TargetMacrosController < ApplicationController
 
     @estimated_macros = NutritionCalculator.new(current_user, params[:goal], params[:activity_level]).calculate_macros
 
+    flash.now[:notice] = "Estimated macros for #{params[:goal]} goal and #{params[:activity_level]} activity level. Please input these values in Edit Target Macros to save."
     render :show
   end
 
