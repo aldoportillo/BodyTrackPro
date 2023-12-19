@@ -32,7 +32,45 @@
         </div>
       </div>
     </div>
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">bmr</h5>
+          <p class="card-text"><%= current_user.bmr.round(2) %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card bg-secondary text-white">
+        <div class="card-body">
+          <h5 class="card-title">TDEE</h5>
+          <p class="card-text"><%= current_user.tdee('Very active').round(2) %></p>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <%= @nutrition_info %>
+
+  <%= form_with url: estimate_macros_path, method: :post, local: true, data: { turbo: false }  do |form| %>
+  
+  <%= form.label :activity_level %>
+  <%= form.select :activity_level, options_for_select(['sedentary', 'lightly active', 'moderately active', 'very active', 'super active']), required: true %>
+
+  <%= form.label :goal %>
+  <%= form.select :goal, options_for_select(['weight loss', 'muscle gain', 'maintenance']), required: true %>
+
+  <%= form.submit "Estimate Macros" %>
+<% end %>
+
+<% if @estimated_macros.present? %>
+  <div id="estimated-macros">
+    <h3>Estimated Macros:</h3>
+    <p>Protein: <%= @estimated_macros[:protein] %> grams</p>
+    <p>Carbs: <%= @estimated_macros[:carbs] %> grams</p>
+    <p>Fats: <%= @estimated_macros[:fat] %> grams</p>
+  </div>
+<% end %>
 </div>
 
 <div class="modal fade" id="editTargetMacroModal" tabindex="-1" aria-labelledby="editTargetMacroModalLabel" aria-hidden="true">
