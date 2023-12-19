@@ -1,10 +1,10 @@
 <%= form_with(model: macro) do |form| %>
-  <% if macro.errors.any? %>
+  <% if macro&.errors&.any? %>
     <div style="color: red">
-      <h2><%= pluralize(macro.errors.count, "error") %> prohibited this macro from being saved:</h2>
+      <h2><%= pluralize(macro&.errors&.count, "error") %> prohibited this macro from being saved:</h2>
 
       <ul>
-        <% macro.errors.each do |error| %>
+        <% macro&.errors&.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>

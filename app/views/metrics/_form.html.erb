@@ -1,9 +1,9 @@
 <%= form_with(model: metric) do |form| %>
-  <% if metric.errors.any? %>
+  <% if metric&.errors&.any? %>
     <div class="alert alert-danger">
-      <h4 class="alert-heading"><%= pluralize(metric.errors.count, "error") %> prohibited this metric from being saved:</h4>
+      <h4 class="alert-heading"><%= pluralize(metric&.errors&.count, "error") %> prohibited this metric from being saved:</h4>
       <ul>
-        <% metric.errors.each do |error| %>
+        <% metric&.errors&.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
