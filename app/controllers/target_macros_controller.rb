@@ -2,14 +2,14 @@ class TargetMacrosController < ApplicationController
 
   # GET /target_macros/1 or /target_macros/1.json
   def show
-    @target_macro = current_user.target_macro || current_user.build_target_macros(fat: 0, protein: 0, carb: 0)
+    @target_macro = current_user.target_macro || current_user.build_target_macro(fat: 0, protein: 0, carb: 0)
   end
 
   # GET /target_macros/1/edit
   def edit
     @target_macro = current_user.target_macro
     if @target_macro.nil?
-      @target_macro = current_user.build_target_macros(fat: 0, protein: 0, carb: 0)
+      @target_macro = current_user.build_target_macro(fat: 0, protein: 0, carb: 0)
       @target_macro.save
     end
   end
